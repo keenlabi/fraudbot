@@ -1,0 +1,421 @@
+div.chat_area{
+    background: rgba(174, 197, 255, 0.055);
+    width: 85%;
+    height: 100%;
+}
+div.client_bar{
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.205);
+    background: white;
+    position: sticky;
+    top: 0%;
+    display: flex;
+    height: 52px;
+    padding: 1% 0%;
+    color: rgb(17, 17, 17);
+}
+div.client_bar div.icon{
+    text-transform: uppercase;
+    color: white;
+    width: 4.8%;
+    text-align: center;
+    padding: 1% 0%;
+    margin: 0% 0% 0% 2%;
+    font-weight: 900;
+    font-size: 150%;
+    border-radius: 50%;
+}
+div.client_bar div.name{
+    margin: 0.9% 0% 0% 1%;
+    font-weight: bold;
+    font-size: 160%;
+    width: 60%;
+    text-transform: capitalize;
+}
+div.client_bar div.chat_options{
+    width: 10%;
+    text-align: right;
+    margin: 0% 5% 0% 0%;
+}
+div.client_bar i.fa-refresh{
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    font-size: 150%;
+}
+div.client_bar i.fa-refresh:hover{
+    transform: rotateZ(360deg);
+    transition: 1s infinte;
+}
+div.message_box{
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    height: 67%;
+    padding: 4% 2% 0% 2%;
+}
+div.message_box::-webkit-scrollbar{
+    width: 10px;
+}
+div.message_box::-webkit-scrollbar-button{
+    border: 1px solid rgba(0, 0, 0, 0); 
+    background: rgba(0, 0, 0, 0); 
+}
+div.message_box::-webkit-scrollbar-thumb{
+    background: rgba(14, 14, 14, 0.212);
+    border-radius: 55px;
+}
+div.message_box>div{
+    display: flex;
+    width: 55%;
+}
+div.message_box div.text{
+    box-shadow: 0px 0px 2px 0px rgba(20, 20, 20, 0.137);
+    padding: 15px 15px;
+    overflow-wrap: break-word;
+    border: none;
+    font-size: 80%;
+    line-height: 130%;
+    min-width: 35%;
+}
+div.text_received, div.text_sent{
+    padding: 0.2% 0%;
+}
+div.text_received div.text{
+    background: white;
+    color: rgba(19, 18, 18, 0.733);
+    border-radius: 0px 30px 30px 30px;
+}
+div.text_sent div.text{
+    background: rgb(77, 122, 236);
+    border: 1px solid rgb(77, 122, 236);
+    color: white;
+    border-radius: 30px 30px 0px 30px;
+}
+div.message_box div.text_sent{
+    justify-content: flex-end;
+    margin: 0% 0% 0% 45%;
+}   
+div.to_bottom{
+    border: 1px solid black;
+    background: black;
+    color: white;
+    position: fixed;
+    z-index: 5000;
+    margin: 0% 0% 0% 0%;
+    right: 1%;
+    bottom: 17%;
+    cursor: pointer;
+    opacity: 0.3;
+    width: 30px;
+    padding: 2px 0px;
+    font-size: 130%;
+    border-radius: 50%;
+    text-align: center;
+}
+div.to_bottom:hover{
+    opacity: 1;
+    box-shadow: 0px 0px 5px 0px lightgrey;
+}
+div.typing_area{
+    background: white;
+    padding: 1% 0% 1.5%;
+    display: flex;
+    position: fixed;
+    bottom: 0%;
+    width: 90%;
+    height: 65px;
+}
+textarea.typing_box{
+    min-width: 50%;
+    max-width: 50%;
+    margin: 0% 0% 0% 5%;
+    padding: 24px 12px 0%;
+    font-size: 110%;
+    outline: none;
+    border-radius: 45px;
+    font-family: 'josefin sans';
+    background: rgba(223, 223, 223, 0.788);
+    border: rgba(223, 223, 223, 0.788);
+}
+textarea.typing_box::placeholder{
+    color: rgb(146, 145, 145);
+}
+textarea.typing_box::-webkit-scrollbar{
+    width: 10px;
+}
+textarea.typing_box::-webkit-scrollbar-button, textarea.typing_box::-webkit-resizer, textarea.typing_box::-webkit-scrollbar-corner{
+    border: 1px solid rgba(0, 0, 0, 0); 
+    background: rgba(0, 0, 0, 0); 
+}
+textarea.typing_box::-webkit-scrollbar-thumb{
+    background: black;
+    border-radius: 55px;
+}
+button.sendmessage{
+    background: none;
+    border: 1px solid rgb(20, 84, 168);
+    box-shadow: 0px 0px 3px 0px rgba(24, 24, 24, 0.432);
+    width: 5.2%;
+    border-radius: 50%;
+    height: 96%;
+    text-align: center;
+    padding: 0% 0% 0% 0.5%;
+    margin: 0.2% 0% 0% 2%;
+    cursor: pointer;
+    outline: none;
+    background: rgb(20, 84, 168);
+}
+i.fa-angle-right{
+    font-size: 200%;
+    font-weight: 900;
+    color: white;
+}
+
+div.errormsg{
+    text-align: center;
+    width: 65%;
+    margin: 20% auto 0%;
+    color: rgb(168, 168, 168);
+    font-size: 250%;
+}
+div.errormsg button{
+    outline: none;
+    border: 1px solid rgb(77, 122, 236);
+    margin: 10% 0% 0%;
+    padding: 2% 0%;
+    width: 30%;
+    background: rgb(77, 122, 236);
+    color: white;
+    font-weight: bold;
+    font-family: 'karla';
+    border-radius: 20px;
+    box-shadow: 0px 3px 15px 0px lightgrey;
+    cursor: pointer;
+}
+div.sendingfail{
+    border: 1px solid rgba(238, 6, 83, 0.849);
+    position: absolute;
+    z-index: 1000;
+    width: 39%;
+    text-align: center;
+    padding: 0.5% 0%;
+    display: none;
+    margin: 0% 0% 0% 10%;
+    font-size: 80%;
+    font-weight: bold;
+    background: rgba(238, 6, 83, 0.849);
+    color: white;
+}
+div.bot_area{
+    right: 35%;
+    margin: 0% 0% 0% 1%;
+    height: 50px;
+}
+div.hide{
+    text-align: right;
+}
+i.fa-eye-slash{
+    color: grey;
+    font-size: 150%;
+    cursor: pointer;
+}
+div.bot_area div.bot_message{
+    color: rgba(238, 6, 83, 0.849);
+    font-weight: bold;
+    position: absolute;
+    background: white;
+    border: 1px solid white;
+    box-shadow: 0px 0px 5px 1px rgb(230, 230, 230);
+    margin: 0% 0% 0% 0%;
+    bottom: 90%;
+    left: 1%;
+    padding: 1%;
+    border-radius: 5px;
+    width: 200px;
+}
+div.bot_area img{
+    border: 2px solid rgba(238, 6, 83, 0.849);
+    box-shadow: 0px 3px 15px 1px lightgrey;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 2px;
+    display: inline-flex;
+    width: 50px;
+    height: 90%;
+    border-radius: 50%;
+}
+div.bot_area img:active{
+    transform: scale(0.9);  
+}
+.innocent{
+    border: 1px solid rgb(217, 221, 218);
+    background: rgb(217, 221, 218);
+}
+.unsure{
+    border: 1px solid rgb(40, 190, 20);
+    background: rgb(40, 190, 20);
+}
+.suspect{
+    border: 1px solid rgb(136, 103, 25);
+    background: rgb(136, 103, 25);
+}
+.busted{
+    border: 1px solid rgb(233, 35, 35);
+    background: rgb(233, 35, 35);
+}
+
+@media screen and ( max-width: 1024px){
+    div.chat_area{
+        width: unset;
+        height: 100%;
+    }
+    div.client_bar{
+        position: fixed;
+        width: 100%;
+        top: 71px;
+    }
+    div.client_bar div.icon{
+        width: 55.5px;
+        margin: 0% 0% 0% 2%;
+    }
+    div.client_bar div.name{
+        margin: 1% 0% 0% 2%;
+    }
+    div.message_box{
+        margin: 3% 0% 0%;
+        height: 80%;
+        padding: 3% 2% 0% 2%;
+        position: sticky;
+        top: 140px;
+    }
+    div.message_box::-webkit-scrollbar{
+        display: none;
+    }
+    div.to_bottom{
+        opacity: 1;
+        right: 5%;
+        bottom: 10%;
+    }
+    div.typing_area{
+        background: white;
+        width: 100%;
+    }
+    textarea.typing_box{
+        min-width: 60%;
+        max-width: 60%;
+        padding: 24px 16px 0%;
+        font-size: 130%;
+    }
+    button.sendmessage{
+        width: 65px;
+    }
+    div.bot_area div.bot_message{
+        margin: -10vh 0% 0% 0%;
+    }
+}
+
+@media screen and ( max-width: 768px){
+    div.bot_area div.bot_message{
+        margin: -13vh 0% 0% 0%;
+    }
+}
+
+@media screen and ( max-width: 570px ){
+    div.client_bar{
+        height: 48px;
+        position: fixed;
+        width: 100%;
+        top: 60px;
+    }
+    div.client_bar div.icon{
+        width: 48px;
+        padding: 10px 0%;
+        height: 25px;
+    }
+    div.client_bar div.name{
+        margin: 2% 0% 0% 2%;
+        width: 40%;
+    }
+    div.client_bar div.chat_options{
+        width: 40%;
+        text-align: right;
+        margin: 0% 0% 0%;
+    }
+    div.client_bar i.fa-refresh{
+        margin: 10% 0% 0%;
+        font-size: 130%;
+    }
+    div.message_box{
+        top: 120px;
+        padding: 2% 2% 0%;
+        height: 75vh;
+    }
+    div.typing_area{
+        height: 45px;
+    }
+    textarea.typing_box{
+        min-width: 65%;
+        max-width: 65%;
+        margin: 0% 0% 0% 2%;
+        padding: 14px 12px 0%;
+        font-size: 100%;
+    }
+    button.sendmessage{
+        width: 45px;
+        font-size: 90%;
+        padding: 0% 0% 0% 0.5%;
+        margin: 0.2% 0% 0% 2%;
+    }
+    i.fa-angle-right{
+        font-size: 150%;
+    }
+    div.bot_area{
+        margin: 0% 0% 0% 2%;
+        height: 50px;
+    }
+    div.bot_area div.bot_message{
+        margin: 0% 0% 0% 0%;
+        bottom: 110%;
+        font-size: 90%;
+    }
+    div.bot_area img{
+        box-shadow: none;
+        padding: 2px;
+        width: 30px;
+        height: 60%;
+        border-radius: 50%;
+    }
+}
+
+@media screen and (max-width: 414px){
+    div.client_bar div.icon{
+        padding: 6px 0% 13px;
+    }
+    div.client_bar div.chat_options{
+        width: 37%;
+    }
+}
+
+@media screen and (max-width: 375px){
+    div.client_bar div.icon{
+        padding: 7px 0% 12px;
+    }
+    div.client_bar div.chat_options{
+        width: 37%;
+    }
+    div.message_box{
+        height: 72vh;
+    }
+    div.bot_area img{
+        box-shadow: none;
+        padding: 2px;
+        width: 28px;
+        height: 56%;
+    }
+}
+
+@media screen and (max-width: 360px){
+    div.message_box{
+        height: 70vh;
+    }
+}

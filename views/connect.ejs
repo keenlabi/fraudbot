@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#1454a8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1454a8">
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/connect.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <link rel="icon" type="image/png" href="/images/conc_bot.jpg">
+    <title>Chat Bot</title>
+</head>
+<body>
+
+    <section class="frame">
+
+        <div class="head">
+            <div class="logo animated1 fadeInLeft">
+                <div class="eyes"></div> <div class="eyes"></div> 
+            </div>
+            <div class="heading">
+                FROBOT
+            </div>
+        </div>
+
+        <div class="form">
+            <form class="connectform" action="/connect" method="POST">
+                <div class="errormsg">
+                <%if(msg != '') { %><%=msg%><% } %>
+                </div>
+                <%if(nouser != '') { %>
+                    <input type="text"  class="markred" name="signinas" value="<%=signinas%>" placeholder="Sign In As" autocomplete>
+                    <p class="errormessage"><%=nouser %></p>
+                <% } else { %>
+                    <input type="text" name="signinas" value="<%=signinas%>" placeholder="Sign In As" autocomplete>
+                <% } %>
+
+                <%if(noclient != '') { %>
+                    <input type="text" class="markred" name="connectwith" value="<%=connectwith%>" placeholder="Connect With">
+                    <p class="errormessage"><%=noclient %></p>
+                <% } else { %>
+                    <input type="text" class="" name="connectwith" value="<%=connectwith%>" placeholder="Connect With">
+                <% } %>
+                <button type="submit">CONNECT</button>
+            </form>
+        </div>
+        
+        <div class="copy">&copy; 2019. Tipster By The Mastermind.</div>
+    </section>
+    <script>
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#1454a8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1454a8">
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/chatroom.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <link rel="icon" type="image/png" href="/images/conc_bot.jpg">
+    <title>Chat Bot</title>
+</head>
+<body>
+
+    <section class="main_frame">
+        <header>
+            <div class="logo">
+                FRAUDBOT
+            </div>
+            <div class="nav1">
+                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
+                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
+                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                    <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
+                <% } %>
+            </div>
+            <div class="nav2">
+                <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
+            </div>
+            <i class="fa fa-bars"></i>
+        </header>
+        <div class="layer animated0"></div>
+        <div class="smallscreennav animated0">
+            <div class="close"><i class="fa fa-times"></i></div>
+            <div class="nav">
+                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
+                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
+                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                    <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
+                <% } %>
+                <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
+            </div>
+        </div>
+
+        <div class="chat_area">
+            <div class="client_bar">
+                <%var initial = sessionClient.name.slice(0, 1)%>
+                
+                <%if(sessionClient.fraudlevel == 'innocent') { %>
+                    <div class="icon innocent"><%=initial %></div>
+                <% } else if(sessionClient.fraudlevel == 'unsure') { %>
+                    <div class="icon unsure"><%=initial %></div>
+                <% } else if(sessionClient.fraudlevel == 'suspect') { %>
+                    <div class="icon suspect"><%=initial %></div>
+                <% } else if(sessionClient.fraudlevel == 'busted') { %>
+                    <div class="icon busted"><%=initial %></div>
+                <% } %>
+                <div class="name"><%=sessionClient.name%></div>
+                <div class="chat_options">
+                    <a href="/refresh"><i class="fa fa-refresh"></i></a>
+                </div>
+            </div>
+
+            <!-- <div class="sendingfail">There's was an error sending your text. Check your connection <i class="fa fa-wifi"></i></div> -->
+            <div class="message_box">
+
+            </div>
+
+          <div class="to_bottom" onclick="to_current_msg"><i class="fa fa-caret-down"></i></div>
+
+          <form action="/sendmessage" method="POST">
+                <div class="typing_area">
+                    <div class="bot_area">
+                        <div class="bot_message">
+                            <div class="bot_message_text"></div>
+                            <div class="hide"><i class="fa fa-eye-slash" onclick="hideBotMessage()"></i></div>
+                        </div>
+                        <img src="/images/conc_bot.jpg" onclick="showBotMessage()">
+                    </div>
+        
+                    <textarea class="typing_box" name='messagefromuser' placeholder="Type a message...." required></textarea>
+                    <input type="text" name="sentfrom" value="me" hidden>
+                    <button type="submit" class="sendmessage"><i class="fa fa-angle-right" title="Send Message"></i></button>
+                </div>
+            </form>
+        </div>
+        
+    </section>
+
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/chat.js"></script>
+    <script>
+        var to_current_msg = document.querySelector('div.to_bottom');
+
+        to_current_msg.onclick= ()=>{
+             var messageBox = document.querySelector('div.message_box');
+                   messageBox.scrollTo(0, messageBox.scrollHeight)
+        }
+
+        var smallScreenNav = document.querySelector('div.smallscreennav');
+        var layer = document.querySelector('div.layer');
+
+        var openDrawer = document.querySelector('i.fa-bars');
+        openDrawer.onclick = () =>{
+            console.log('clicked');
+            
+            layer.classList.remove('fadeOut');
+            layer.classList.add('fadeIn');
+            layer.style.display = 'block'
+
+            smallScreenNav.classList.remove('slideOutLeft');
+            smallScreenNav.classList.add('slideInLeft');
+            smallScreenNav.style.display = 'block'
+        }
+
+        var closeDrawer = document.querySelector('i.fa-times');
+        closeDrawer.onclick = () =>{
+            layer.classList.remove('fadeIn');
+            layer.classList.add('fadeOut');
+            layer.style.display = 'none'
+
+            smallScreenNav.classList.remove('slideInLeft');
+            smallScreenNav.classList.add('slideOutLeft');
+        }
+        
+        layer.onclick = () =>{
+            layer.classList.remove('fadeIn');
+            layer.classList.add('fadeOut');
+            layer.style.display = 'none'
+
+            smallScreenNav.classList.remove('slideInLeft');
+            smallScreenNav.classList.add('slideOutLeft');
+        }
+
+        function hideBotMessage(){
+            $('div.bot_message').hide()
+        }
+        function showBotMessage(){
+            $('div.bot_message').show()
+        }
+    </script>
+</body>
+</html>

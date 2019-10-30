@@ -1,0 +1,275 @@
+div.registered_users{
+    width: 85%;
+    overflow-y: auto;
+    height: 100%;
+}
+div.head{
+    padding: 4% 3% 2%;
+}
+div.title{
+    display: inline-block;
+    font-size: 200%;
+    font-weight: 900;
+}
+form.adduser{
+    padding: 1px;
+    border: 3px solid rgba(47, 136, 253, 0.37);
+    display: inline-flex;
+    margin: 0% 0% 0% 30%;
+    width: 30%;
+    border-radius: 25px;
+    overflow: hidden;
+}
+form.adduser input{
+    border: none;
+    width: 75%;
+    padding: 3% 4%;
+    outline: none;
+    font-weight: bold;
+    background: none;
+}
+form.adduser button{
+    outline: none;
+    width: 25%;
+    border: none;
+    background: rgb(47, 137, 253);
+    color: white;
+    font-weight: bold;
+    font-family: 'Thasadith';
+    border-radius: 15px;
+    cursor: pointer;
+}
+form.adduser button:active{
+    transform: scale(0.95);
+}
+div.user_list{
+    padding: 6% 0% 0%;
+    text-align: center;
+}
+div.user{
+    box-shadow: 0px 0px 15px 0px rgb(236, 236, 236);
+    width: 28%;
+    height: 100px;
+    display: inline-flex;
+    margin: 1% 1%;
+    text-align: left;
+    padding: 0.5%;
+}
+div.icon{
+    width: 20%;
+    text-align: center;
+    height: 22%;
+    border-radius: 50%;
+    padding: 6% 0%;
+    margin: 5% 0% 0% 5%;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 110%;
+    color: white;
+}
+.innocent{
+    border: 1px solid rgb(217, 221, 218);
+    background: rgb(217, 221, 218);
+}
+.unsure{
+    border: 1px solid rgb(116, 136, 25);
+    background: rgb(116, 136, 25);
+}
+.suspect{
+    border: 1px solid rgb(136, 103, 25);
+    background: rgb(136, 103, 25);
+}
+.busted{
+    border: 1px solid rgb(233, 35, 35);
+    background: rgb(233, 35, 35);
+}
+div.details{
+    margin: 5% 0% 0% 3%;
+    width: 60%;
+}
+div.name{
+    font-weight: bold;
+    font-size: 130%;
+    text-transform: capitalize;
+}
+form.label{
+    display: flex;
+    margin: 7% 0% 0%;
+}
+div.fraud{
+    width: 50%;
+    font-size: 110%;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: grey;
+}
+button.refresh{
+    width: 50%;
+    text-align: right;
+    border: none;
+    background: none;
+    outline: none;
+}
+button.refresh i.fa{
+    font-size: 140%;
+    cursor: pointer;
+}
+button.refresh i.fa:hover{
+    transform: rotateZ(460deg);
+    transition: 10s;
+}
+
+@media screen and ( max-width: 1024px){
+    div.registered_users{
+        width: 100%;
+    }
+    div.head{
+    }
+    div.title{
+        font-size: 210%;
+    }
+    form.adduser{
+        margin: 0% 0% 0% 40%;
+    }
+    form.adduser input{
+        width: 70%;
+    }
+    form.adduser button{
+        width: 30%;
+    }
+}
+
+@media screen and ( max-width: 800px){
+    div.user{
+        height: 85px;
+    }
+    form.adduser{
+        width: 40%;
+        margin: 0% 0% 0% 30%;
+    }
+    div.icon{
+        width: 22%;
+        height: 25%;
+        padding: 6% 0%;
+        margin: 9% 0% 0% 2%;
+    }
+    div.details{
+        margin: 8% 0% 0% 3%;
+    }
+    div.name{
+        font-weight: bold;
+        font-size: 110%;
+        text-transform: capitalize;
+    }
+    form.label{
+        display: flex;
+        margin: 5% 0% 0%;
+    }
+    div.fraud{
+        font-size: 100%;
+    }
+    button.refresh i.fa{
+        font-size: 110%;
+        cursor: pointer;
+    }
+}
+
+@media screen and ( max-width: 700px){
+    form.adduser{
+        width: 50%;
+        margin: 0% 0% 0% 20%;
+    }
+}
+
+@media screen and ( max-width: 600px){
+    form.adduser{
+        width: 50%;
+        margin: 0% 0% 0% 20%;
+    }
+    div.user_list{
+        padding: 3% 0% 0%;
+    }
+    div.user{
+        width: 45%;
+    }
+    div.icon{
+        width: 22%;
+        height: 25%;
+        padding: 6% 0%;
+        margin: 5% 0% 0% 2%;
+    }
+    div.details{
+        margin: 6% 0% 0% 3%;
+    }
+}
+
+@media screen and ( max-width: 500px){
+    div.registered_users{
+        margin: 100px 0px 0px;
+    }
+    div.head{
+        padding: 0% 0%;
+    }
+    div.title{
+        display: block;
+        font-size: 200%;
+        font-weight: 900;
+        padding: 2% 0% 2% 2%;
+    }
+    form.adduser{
+        border: 2px solid rgba(47, 136, 253, 0.37);
+        display: flex;
+        margin: 0% 0% 0% 2%;
+        width: 95%;
+        border-radius: 5px;
+    }
+    form.adduser input::placeholder{
+        color: rgb(30, 30, 30);
+    }
+    form.adduser button{
+        border-radius: 5px;
+    }
+    div.user{
+        box-shadow: none;
+        border-bottom: 1px solid lightgrey;
+        height: 100px;
+        width: 98%;
+        margin: 0%;
+    }
+    div.icon{
+        width: 14%;
+        height: 25%;
+        padding: 4% 0%;
+        margin: 5% 0% 0% 2%;
+    }
+    div.name{
+        font-size: 130%;
+    }
+    div.details{
+        width: 75%;
+    }
+    form.label{
+        margin: 4% 0% 0%;
+    }
+}
+
+@media screen and ( max-width: 375px){
+    div.title{
+        font-size: 150%;
+    }
+    div.icon{
+        width: 14%;
+        height: 25%;
+        padding: 3.2% 0%;
+        margin: 7% 0% 0% 2%;
+    }
+    div.name{
+        font-size: 130%;
+    }
+    div.details{
+        width: 75%;
+    }
+    form.label{
+        margin: 4% 0% 0%;
+    }
+}

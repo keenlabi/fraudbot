@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#1454a8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1454a8">
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/bot.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <link rel="icon" type="image/png" href="/images/conc_bot.jpg">
+    <title>Chat Bot</title>
+</head>
+<body>
+
+    <section class="main_frame">
+        <header>
+            <div class="logo">
+                FRAUDBOT
+            </div>
+            <div class="nav1">
+                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
+                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
+                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                    <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
+                <% } %>
+            </div>
+            <div class="nav2">
+                <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
+            </div>
+            <i class="fa fa-bars"></i>
+        </header>
+        <div class="layer animated0"></div>
+        <div class="smallscreennav animated0">
+            <div class="close"><i class="fa fa-times"></i></div>
+            <div class="nav">
+                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
+                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
+                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                    <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
+                <% } %>
+                <a href="/disconnect"><div><i class="fa fa-power-off"></i> DISCONNECT</div></a>
+            </div>
+        </div>
+
+        <div class="bot_brain">
+            <div class="header">
+                <div class="title">Bot's Brain</div>
+                <form action="/uploaddictionary" method="POST" class="add_new"> 
+                    <input type="text" name="newkeyword" placeholder="Word, Phrase or Sentence" required>
+                    <button type="submit">ADD TO DICT</button>
+                </form>
+                <% if(msg != '') { %>
+                    <div class="msg"><%=msg %></div>
+                <% } %>
+            </div>
+
+            <div class="content">
+                <div class="title">ALL KEYWORDS</div>
+                <%if( msg == '' ) { %>
+                    <%for( var i = keywords.length - 1; i > 0; i--) { %>
+                        <div class="keyword">
+                            <form action="/removekeyword" method="POST">
+                                <div><%=keywords[i].content %><button type="submit"><i class="fa fa-trash"></i></button></div>
+                                <input type="text" name="a_keyword" value="<%=keywords[i].content %>" hidden>
+                            </form>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <div class="errormsg"><i class="fa fa-exclamation-circle"></i><%=msg%>There was an error fetching users. Reload the page. <br>
+                        <a href="/bot"><button>RELOAD</button></a>
+                    </div>
+            <% } %>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        
+        var smallScreenNav = document.querySelector('div.smallscreennav');
+        var layer = document.querySelector('div.layer');
+
+        var openDrawer = document.querySelector('i.fa-bars');
+        openDrawer.onclick = () =>{
+            console.log('clicked');
+            
+            layer.classList.remove('fadeOut');
+            layer.classList.add('fadeIn');
+            layer.style.display = 'block'
+
+            smallScreenNav.classList.remove('slideOutLeft');
+            smallScreenNav.classList.add('slideInLeft');
+            smallScreenNav.style.display = 'block'
+        }
+
+        var closeDrawer = document.querySelector('i.fa-times');
+        closeDrawer.onclick = () =>{
+            layer.classList.remove('fadeIn');
+            layer.classList.add('fadeOut');
+            layer.style.display = 'none'
+
+            smallScreenNav.classList.remove('slideInLeft');
+            smallScreenNav.classList.add('slideOutLeft');
+        }
+    </script>
+</body>
+</html>

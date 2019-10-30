@@ -1,0 +1,273 @@
+*{
+    margin: 0%;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+body{
+    font-family: 'karla', sans-serif;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+section.main_frame{
+    display: flex;
+    height: 100vh;
+}
+header{
+    background: rgb(20, 84, 168);
+    color: white;
+    width: 15%;
+    font-weight: bold;
+}
+div.logo{
+    font-size: 180%;
+    font-weight: 700;
+    margin: 10% 0% 0%;
+    text-align: center;
+}
+div.nav1{
+    margin: 40% 0% 0% 0%;
+}
+div.nav1 i.fa{
+    width: 10%;
+}
+div.nav1 div{
+    padding: 10% 0% 10% 22%;
+}
+div.nav1 div.current{
+    border-right: 5px solid white;
+    background: rgba(12, 54, 161, 0.329);
+}
+div.nav2{
+    position: absolute;
+    width: 201px;
+    bottom: 0%;
+}
+div.nav2 div{
+    padding: 10% 0% 10% 22%;
+}
+div.nav1 div.newchatbtn{
+    border: 1px solid white;
+    background: white;
+    width: 60%;
+    padding: 3% 0% 3% 2%;
+    border-radius: 35px;
+    margin: 15% 0% 0% 18%;
+    color: rgb(20, 84, 168);
+}
+div.nav1 div.newchatbtn i.fa-pencil{
+    color: white;
+    border: 1px solid rgb(20, 84, 168);
+    padding: 4px 5px;
+    margin: 0% 2%;
+    border-radius: 50%;
+    background: rgb(20, 84, 168);
+}
+div.smallscreennav{
+    display: none;
+}
+i.fa-bars{
+    display: none;
+}
+
+@media screen and ( max-width: 1024px ){
+    section.main_frame{
+        display: block;
+        height: 100vh;
+    }
+    header{
+        position: fixed;
+        top: 0%;
+        z-index: 1000;
+        width: 100%;
+        height: 70px;    
+        display: flex;
+        padding: 0% 0%;
+    }
+    div.logo{
+        margin: 0% 0% 0% 3%;
+        padding: 20px 0% 0% 0%;
+        font-size: 200%;
+        text-align: center;
+    }
+    div.nav1{
+        height: 100%;
+        margin: 0% 0% 0% 3%;
+        width: 35%;
+        justify-content: space-evenly;
+    }
+    div.nav1 i.fa{
+        width: 20%;
+        text-align: center;
+    }
+    div.nav1 div{
+        text-align: center;
+        padding: 30px 0% 19px 0%;
+        width: 31%;
+        display: inline-block;
+    }
+    div.nav1 div.current{
+        border: none;
+        border-bottom: 3px solid white;
+        background: none;
+    }
+    div.nav2{
+        position: absolute;
+        width: 15%;
+        bottom: unset;
+        right: 0%;
+        padding: 18px 0% 0% 0%;
+    }
+}
+
+@media screen and ( max-width: 768px ){
+    header{
+        
+    }
+    div.nav1{
+        width: 40%;
+    }
+    div.nav2{
+        position: absolute;
+        width: 15%;
+        bottom: unset;
+        right: 0%;
+    }
+}
+
+@media screen and ( max-width: 690px ){
+    header{
+        padding: 0% 2%;
+    }
+    div.logo{
+        font-size: 180%;
+        margin: 3px 0px 0px 0px;
+    }
+    div.nav1{
+        font-size: 90%;
+    }
+    div.nav1 div{
+        text-align: center;
+        padding: 32px 0% 19px 0%;
+        width: 31%;
+        display: inline-block;
+    }
+    div.nav2{
+        width: 21%;
+        font-size: 85%;
+        padding: 19px 0% 0% 0%;
+    }
+}
+
+@media screen and ( max-width: 570px ){
+    header{
+        margin: 0% 0% 0% 0%;
+        display: block;
+        height: 60px;
+        padding: 0% 0% 0% 0%;
+        z-index: 500;
+    }
+    div.logo{
+        font-size: 150%;
+        font-weight: 700;
+        text-align: left;
+        margin: -1.2% 0% 0% 3%;
+        display: inline-block;
+    }
+    i.fa-bars{
+        display: block;
+        position: absolute;
+        right: 3%;
+        top: 28%;
+        font-size: 150%;
+    }
+    div.layer{
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.644);
+        z-index: 1500;
+        display: none;
+    }
+    div.smallscreennav{
+        border: 1px solid rgb(20, 84, 168);
+        background: rgb(20, 84, 168);
+        position: fixed;
+        width: 50%;
+        height: 100vh;
+        top: 0%;
+        left: 0%;
+        z-index: 2000;
+        color: white;
+        font-weight: bold;
+        display: none;
+    }   
+    div.close{
+        font-size: 200%;
+        padding: 1.5% 5%;
+        margin: 0% 0% 25% 0%;
+    }
+    div.smallscreennav div.bot_area{
+        position: unset;
+        display: block;
+        margin: 5% 0% 0%;
+        height: 40%;
+    }
+    div.smallscreennav div.bot_area img{
+        box-shadow: none;
+        border: 2px solid white;
+        position: unset;
+        display: block;
+        margin: 0% auto 0%;
+        width: 110px;
+        height: 100px;
+    }
+    div.smallscreennav div.bot_area div.bot_message{
+        background: none;
+        margin: 0% 0% 0% 0%;
+        position: unset;
+        width: ;        
+        box-shadow: none;
+    }
+    div.nav{
+    }
+    div.nav div{
+        font-weight: bold;
+        font-size: 130%;
+        text-transform: uppercase;
+        padding: 10% 5%;
+    }
+    div.nav div i.fa{
+        width: 15%;
+    }
+    div.nav1{
+        display: none;
+        margin: 0% 0% 0% 0%;
+        height: unset;
+        width: 70%;
+    }
+    div.nav1 div{
+        padding: 25px 0% 9px 0%;
+        font-size: 100%;
+        display: inline-block;
+    }
+    div.nav2{
+        display: none;
+        text-align: right;
+        position: unset;
+        width: 25%;
+        font-size: 85%;
+        padding: 0px 0% 0% 0%;
+    }
+}
+
+@media screen and ( max-width: 320px ){
+    div.nav2{
+        width: 28%;
+        text-align: center;
+    }
+}
