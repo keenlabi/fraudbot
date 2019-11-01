@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#1454a8">
     <meta name="apple-mobile-web-app-status-bar-style" content="#1454a8">
 
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=karla&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="/css/chatroom.css">
     <link rel="stylesheet" href="/css/animate.css">
@@ -33,11 +33,13 @@
             <div class="nav2">
                 <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
             </div>
-            <i class="fa fa-bars"></i>
         </header>
         <div class="layer animated0"></div>
         <div class="smallscreennav animated0">
-            <div class="close"><i class="fa fa-times"></i></div>
+            <div class="user">
+                <i class="fa fa-user-circle"></i>
+                <div class="username"><%=sessionUser.name%></div>
+            </div>
             <div class="nav">
                 <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
                 <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
@@ -65,6 +67,7 @@
                 <div class="chat_options">
                     <a href="/refresh"><i class="fa fa-refresh"></i></a>
                 </div>
+                <i class="fa fa-bars"></i>
             </div>
 
             <!-- <div class="sendingfail">There's was an error sending your text. Check your connection <i class="fa fa-wifi"></i></div> -->
@@ -78,7 +81,7 @@
                 <div class="typing_area">
                     <div class="bot_area">
                         <div class="bot_message">
-                            <div class="bot_message_text"></div>
+                            <div class="bot_message_text">Hello. I'm the fraud detector, I would alert you when I suspect a fraud attempt. </div>
                             <div class="hide"><i class="fa fa-eye-slash" onclick="hideBotMessage()"></i></div>
                         </div>
                         <img src="/images/conc_bot.jpg" onclick="showBotMessage()">
@@ -118,16 +121,6 @@
             smallScreenNav.classList.remove('slideOutLeft');
             smallScreenNav.classList.add('slideInLeft');
             smallScreenNav.style.display = 'block'
-        }
-
-        var closeDrawer = document.querySelector('i.fa-times');
-        closeDrawer.onclick = () =>{
-            layer.classList.remove('fadeIn');
-            layer.classList.add('fadeOut');
-            layer.style.display = 'none'
-
-            smallScreenNav.classList.remove('slideInLeft');
-            smallScreenNav.classList.add('slideOutLeft');
         }
         
         layer.onclick = () =>{

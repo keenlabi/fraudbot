@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#1454a8">
     <meta name="apple-mobile-web-app-status-bar-style" content="#1454a8">
 
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=karla&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="/css/users.css">
     <link rel="stylesheet" href="/css/animate.css">
@@ -37,11 +37,14 @@
         </header>
         <div class="layer animated0"></div>
         <div class="smallscreennav animated0">
-            <div class="close"><i class="fa fa-times"></i></div>
+            <div class="user">
+                <i class="fa fa-user-circle"></i>
+                <div class="username"><%=sessionUser.name%></div>
+            </div>
             <div class="nav">
-                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
+                <a href="/"><div><i class="fa fa-comments-o"></i> Chat</div></a>
                 <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
-                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                    <a href="/users"><div class="current"><i class="fa fa-users"></i> Users</div></a>
                     <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
                 <% } %>
                 <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
@@ -112,9 +115,8 @@
             smallScreenNav.classList.add('slideInLeft');
             smallScreenNav.style.display = 'block'
         }
-
-        var closeDrawer = document.querySelector('i.fa-times');
-        closeDrawer.onclick = () =>{
+        
+        layer.onclick = () =>{
             layer.classList.remove('fadeIn');
             layer.classList.add('fadeOut');
             layer.style.display = 'none'

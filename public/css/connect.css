@@ -15,13 +15,13 @@ div.head{
     display: flex;
 }
 div.logo{
-    border: 1px solid rgb(47, 137, 253);
+    border: 1px solid rgb(13, 109, 235);
     width: 50px;
     height: 35px;
     border-radius: 50%;
     margin: 0% 0% 0% 28%;
     padding: 1% 0%;
-    background: rgb(47, 137, 253);
+    background: rgb(13, 109, 235);
 }
 div.logo div.eyes{
     border: 1px solid white;
@@ -87,8 +87,8 @@ input.markred:focus ~ p.errormessage{
     display: none;
 }
 button{
-    border: 1px solid rgb(47, 137, 253);
-    background: rgb(47, 137, 253);
+    border: 1px solid rgb(13, 109, 235);
+    background: rgb(13, 109, 235);
     color: white;
     width: 50%;
     padding: 4% 0%;
@@ -108,8 +108,7 @@ div.copy{
     width: 100%;
     position: absolute;
     top: 90vh;
-    font-weight: bold;
-    font-size: 90%;
+    font-size: 80%;
     color: rgba(31, 47, 68, 0.699);
 }
 

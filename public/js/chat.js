@@ -45,18 +45,19 @@ $(document).ready(()=>{
                     $('div.message_box').append(messagesOnScreen[i]);            
                 }
 
-                if(clientId.fraudLevel == 'innocent'){
-                    var empty = "......";
-                    $('div.bot_message_text').html(empty)
-                } else if(clientId.fraudLevel == 'unsure'){
-                     botmsg = "Hmm... there's something not quite right about this user. ";
-                    $('div.bot_message_text').html(botmsg)
-                } else if(clientId.fraudLevel == 'suspect'){
-                    botmsg = "I'm suspecting this user to be a fraud.";
-                    $('div.bot_message_text').html(botmsg)
-                } else if(clientId.fraudLevel == 'busted'){
-                     botmsg = "This user has been caught trying scam you. You're advised to block immediately.";
-                    $('div.bot_message_text').html(botmsg)
+                if(data.clientFraudLevel == 'innocent'){
+                    
+                } else if(data.clientFraudLevel == 'unsure'){
+                     var unsure = "Hmm... there's something not quite right about this user. ";
+                    $('div.bot_message_text').html(unsure)
+                } else if(data.clientFraudLevel == 'suspect'){
+                     var suspect = "I'm suspecting this user to be a fraud.";
+                    $('div.bot_message_text').html(suspect)
+                } else if(data.clientFraudLevel == 'busted'){
+                     var busted = "This user has been caught trying scam you. You're advised to block immediately.";
+                    $('div.bot_message_text').html(busted)
+                } else{
+                    console.log('Couldnt detect level');
                 }
                 
             },

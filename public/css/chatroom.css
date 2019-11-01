@@ -68,8 +68,8 @@ div.message_box>div{
     width: 55%;
 }
 div.message_box div.text{
-    box-shadow: 0px 0px 2px 0px rgba(20, 20, 20, 0.137);
-    padding: 15px 15px;
+    box-shadow: 0px 0px 3px 0px rgba(20, 20, 20, 0.137);
+    padding: 10px 10px;
     overflow-wrap: break-word;
     border: none;
     font-size: 80%;
@@ -85,8 +85,8 @@ div.text_received div.text{
     border-radius: 0px 30px 30px 30px;
 }
 div.text_sent div.text{
-    background: rgb(77, 122, 236);
-    border: 1px solid rgb(77, 122, 236);
+    background: rgb(22, 97, 195);
+    border: 1px solid rgb(22, 97, 195);
     color: white;
     border-radius: 30px 30px 0px 30px;
 }
@@ -152,7 +152,7 @@ textarea.typing_box::-webkit-scrollbar-thumb{
 }
 button.sendmessage{
     background: none;
-    border: 1px solid rgb(20, 84, 168);
+    border: 1px solid rgb(22, 97, 195);
     box-shadow: 0px 0px 3px 0px rgba(24, 24, 24, 0.432);
     width: 5.2%;
     border-radius: 50%;
@@ -162,7 +162,7 @@ button.sendmessage{
     margin: 0.2% 0% 0% 2%;
     cursor: pointer;
     outline: none;
-    background: rgb(20, 84, 168);
+    background: rgb(22, 97, 195);
 }
 i.fa-angle-right{
     font-size: 200%;
@@ -321,34 +321,48 @@ div.bot_area img:active{
 }
 
 @media screen and ( max-width: 570px ){
+    header{
+        display: none;
+    }
     div.client_bar{
-        height: 48px;
+        height: 45px;
         position: fixed;
         width: 100%;
-        top: 60px;
+        top: 0px;
+        z-index: 1000;
     }
     div.client_bar div.icon{
-        width: 48px;
-        padding: 10px 0%;
-        height: 25px;
+        width: 40px;
+        padding: 6px 0% 11px;
+        margin: 0.8% 0% 0% 3%;
+        height: 20px;
+        font-size: 120%;
     }
     div.client_bar div.name{
-        margin: 2% 0% 0% 2%;
+        margin: 2% 0% 0% 1%;
         width: 40%;
+        font-size: 140%;
     }
     div.client_bar div.chat_options{
-        width: 40%;
+        width: 30%;
         text-align: right;
         margin: 0% 0% 0%;
     }
     div.client_bar i.fa-refresh{
-        margin: 10% 0% 0%;
-        font-size: 130%;
+        margin: 7% 0% 0%;
+        font-size: 150%;
+        color: rgb(22, 97, 195);
+    }
+    i.fa-bars{
+        color: rgb(22, 97, 195);
+        display: block;
+        font-size: 170%;
+        margin: 2% 0% 2% 5%;
     }
     div.message_box{
-        top: 120px;
+        top: 53px;
         padding: 2% 2% 0%;
-        height: 75vh;
+        height: 83vh;
     }
     div.typing_area{
         height: 45px;
@@ -376,7 +390,7 @@ div.bot_area img:active{
     div.bot_area div.bot_message{
         margin: 0% 0% 0% 0%;
         bottom: 110%;
-        font-size: 90%;
+        font-size: 70%;
     }
     div.bot_area img{
         box-shadow: none;
@@ -388,23 +402,12 @@ div.bot_area img:active{
 }
 
 @media screen and (max-width: 414px){
-    div.client_bar div.icon{
-        padding: 6px 0% 13px;
-    }
-    div.client_bar div.chat_options{
-        width: 37%;
-    }
+    
 }
 
 @media screen and (max-width: 375px){
-    div.client_bar div.icon{
-        padding: 7px 0% 12px;
-    }
-    div.client_bar div.chat_options{
-        width: 37%;
-    }
     div.message_box{
-        height: 72vh;
+        height: 82vh;
     }
     div.bot_area img{
         box-shadow: none;
@@ -416,6 +419,6 @@ div.bot_area img:active{
 
 @media screen and (max-width: 360px){
     div.message_box{
-        height: 70vh;
+        height: 80vh;
     }
 }

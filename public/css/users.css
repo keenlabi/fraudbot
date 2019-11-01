@@ -43,10 +43,9 @@ form.adduser button:active{
     transform: scale(0.95);
 }
 div.user_list{
-    padding: 6% 0% 0%;
-    text-align: center;
+    padding: 6% 0% 0% 3%;
 }
-div.user{
+div.user_list div.user{
     box-shadow: 0px 0px 15px 0px rgb(236, 236, 236);
     width: 28%;
     height: 100px;
@@ -140,7 +139,7 @@ button.refresh i.fa:hover{
 }
 
 @media screen and ( max-width: 800px){
-    div.user{
+    div.user_list div.user{
         height: 85px;
     }
     form.adduser{
@@ -189,7 +188,7 @@ button.refresh i.fa:hover{
     div.user_list{
         padding: 3% 0% 0%;
     }
-    div.user{
+    div.user_list div.user{
         width: 45%;
     }
     div.icon{
@@ -229,7 +228,7 @@ button.refresh i.fa:hover{
     form.adduser button{
         border-radius: 5px;
     }
-    div.user{
+    div.user_list div.user{
         box-shadow: none;
         border-bottom: 1px solid lightgrey;
         height: 100px;
