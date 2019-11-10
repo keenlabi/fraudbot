@@ -327,7 +327,7 @@ module.exports = (app)=>{
 
     app.get("/bot", (req, res)=>{
         if(req.session.user != null) {
-            if(req.session.user.name == 'admin'){
+           if(req.session.user.userType == 'admin'){
             dictionaries.find({}, (err, foundData)=>{
                 if(err){
                         res.render('bot', {
