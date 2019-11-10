@@ -13,103 +13,163 @@ module.exports = (app)=>{
 
 
     //Authentication code, at the end of the process 
-    //user and recipient connection would be made
 
-    app.get("/connect", (req, res)=>{
-        res.render('connect', {
+    app.get("/signin", (req, res)=>{
+        res.render('signin', {
             msg: '',
             nouser: '',
-            noclient: '',
+            wrongpassword: '',
             signinas: '',
-            connectwith: ''
+            password: '',
         });
     });
 
-    app.post("/connect", (req, res)=>{
+    app.post("/signin", (req, res)=>{
         users.findOne({name: req.body.signinas.toLowerCase()}, (err, foundUser)=>{
             if(err){
-                res.render('connect', {
+                res.render('signin', {
                     msg: 'There was a problem getting your data. Please Try again.',
                     nouser: '',
-                    noclient: '',
+                    wrongpassword: '',
                     signinas: req.body.signinas,
-                    connectwith: req.body.connectwith
+                    password: req.body.password
                 });
             } else if(!foundUser){
-                res.render('connect', {
+                res.render('signin', {
                     msg: '',
-                    nouser: 'Account for this user has not been created!',
-                    noclient: '',
+                    nouser: 'Account for this user has not been created !',
+                    wrongpassword: '',
                     signinas: req.body.signinas,
-                    connectwith: req.body.connectwith
+                    password: req.body.password
                 })
             } else if(foundUser){
-                users.findOne({name: req.body.connectwith.toLowerCase()}, (err, foundClient)=>{
-                    if(err){
-                        res.render('connect', {
-                            msg: 'There was a problem getting your data. Please Try again.',
-                            nouser: '',
-                            noclient: '',
-                            signinas: req.body.signinas,
-                            connectwith: req.body.connectwith
-                        });
-                    } else if (!foundClient){
-                        res.render('connect', {
-                            msg: '',
-                            nouser: '',
-                            noclient: 'Account for this user has not been created!',
-                            signinas: req.body.signinas,
-                            connectwith: req.body.connectwith
-                        });
-                    } else if(foundClient){
-                        console.log('Connection between ', foundUser.name ,' and ', foundClient.name ,' has been established.')
-                        req.session.user = foundUser;
-                        req.session.client = foundClient;
-                        
-                        res.redirect('/');
-                    }
-                })
+                if(foundUser.password == req.body.password){
+                    console.log(foundUser.name ,' has successfully logged in.');
+                    req.session.user = foundUser;
+                    
+                    res.redirect('/users');
+                }else {
+                    res.render('signin', {
+                        msg: '',
+                        nouser: '',
+                        wrongpassword: 'Password is incorrect.',
+                        signinas: req.body.signinas,
+                        password: req.body.password
+                    });
+                }
             }
         })
     });
 
-    app.get('/disconnect', (req, res)=>{
-        if(req.session.destroy()){
-            res.redirect('/connect')
+    app.get("/users", (req, res)=>{
+        if(req.session.user != null) {
+                users.find({}, (err, foundData)=>{
+                    if(err){
+                        res.render('users', {
+                            msg: 'Couldn\'t fetch users.'
+                        })
+                    }else if(foundData){
+                        res.render('users', {
+                            sessionUser: req.session.user,
+                            sessionClient: req.session.client,
+                            user: foundData,
+                            msg: ''
+                        })
+                    }
+                })
+         } else {
+                res.redirect('/signin')
         }
-    })
+    });
+
+    app.get("/signup", (req, res)=>{
+        res.render('signup', {
+            msg: '',
+            userexists: '',
+            username: '',
+            password: ''
+        });
+    });
 
     app.post('/createaccount', (req, res)=>{
-        if(req.session.user != null){
-            var newUser = users();
-            newUser.name = req.body.newuser.toLowerCase()
-            newUser.fraudlevel = 'innocent';
+        users.findOne({name: req.body.username.toLowerCase()}, (err, exist)=>{
+            if(err){
+                res.render('signup', {
+                    msg: 'There was a problem saving your data. Please Try again.',
+                    userexists: '',
+                    username: req.body.username,
+                    password: req.body.password
+                });
+            } else if(exist){
+                res.render('signup', {
+                    msg: '',
+                    userexists: 'User name has been taken !',
+                    username: req.body.username,
+                    password: req.body.password
+                })
+            } else {
+                var newUser = users();
 
-            newUser.save((err, saved)=>{
-                if(err){
-                    res.render('signup',{
-                        msg: 'There\'s something wrong with the connection, try again!' 
-                    });
-                }else if(saved){
-                    res.redirect('/users');
-                }
-            })
-        } else {
-            res.redirect('/');
-        }
+                newUser.name = req.body.username.toLowerCase()
+                newUser.password = req.body.password;
+                newUser.fraudLevel = 'innocent';
+                newUser.userType = 'user';
+
+                newUser.save((err, saved)=>{
+                    if(err){
+                        res.render('signup',{
+                            msg: 'There\'s something wrong with the connection, try again!' 
+                        });
+                    }else if(saved){
+                        console.log('New user ' + saved.name ,' has successfully logged in.');
+                        req.session.user = saved;
+                        
+                        res.redirect('/users');
+                    }else{
+                        res.render('signup', {
+                            msg: 'There was an error, couldn\'t save your details.. Try again ! ',
+                            userexists: '',
+                            username: req.body.username,
+                            password: req.body.password
+                        });
+                    }
+                })
+            }
+        })
     })
 
 
     //Chat Page loads once connection has been established
 
-   app.get('/', (req, res)=>{
-        if(req.session.user != null){
-            res.render('chatroom', {
-                sessionClient: req.session.client,
-                sessionUser: req.session.user,
-                });
+   app.get('/chat/:name', (req, res)=>{
+       if(req.session.user != null ){
+           if(req.params.name != null){
+                var clientName = req.params.name.slice(1, req.params.name.length)
+                console.log(req.session.user.name + ' is  requesting to established a connection with ' + clientName)
+        
+                users.findOne({name: clientName}, (err, foundClient)=>{
+                    if(err){
+                        res.render('users', {
+                            msg: 'There was an error connecting to ' + clientName,
+                        });
+                    } else if(foundClient){
+                        if(foundClient.name != req.session.user.name){
+                            req.session.client = foundClient;
+                            console.log(req.session.user.name + ' has established a connection with ' + clientName) 
+                            res.render('chatroom', {
+                                sessionClient: req.session.client,
+                                sessionUser: req.session.user,
+                            });      
+                        } else {
+                            res.redirect('/users')               
+                        }
+                    }
+                })
+           } else {
+                res.redirect('/users')
+           }
         } else {
-            res.redirect('/connect')
+            res.redirect('/users')
         }
    });
 
@@ -181,7 +241,7 @@ module.exports = (app)=>{
                         res.redirect('/disconnect')
                     }
                     if(clientData){
-                        clientData.fraudlevel = user_status;
+                        clientData.fraudLevel = user_status;
                         clientData.save((err, updated)=>{
                             if(err){
                                 res.redirect('/disconnect')
@@ -190,7 +250,7 @@ module.exports = (app)=>{
                                     sessionClient: req.session.client,
                                     sessionUser: req.session.user,
                                     text: foundData,
-                                    clientFraudLevel: req.session.client.fraudlevel
+                                    clientFraudLevel: req.session.client.fraudLevel
                                 }
 
                                 res.send(allData);
@@ -238,62 +298,36 @@ module.exports = (app)=>{
         })
    })
 
-    app.get("/users", (req, res)=>{
-        if(req.session.user != null) {
-            if(req.session.user.name == 'yande' || req.session.user.name == 'ireolu' ){
-                users.find({}, (err, foundData)=>{
-                    if(err){
-                        res.render('users', {
-                            msg: 'Couldn\'t fetch users..'
-                        })
-                    }else if(foundData){
-                        res.render('users', {
-                            sessionUser: req.session.user,
-                            sessionClient: req.session.client,
-                            user: foundData,
-                            msg: ''
-                        })
-                    }
-                })
-            }
-            else {
-                res.redirect('/connect')
-            }
-         } else {
-                res.redirect('/connect')
-            }
-    });
-
     app.post("/resetfraudlevel", (req, res)=>{
-        if(req.session.user.name == 'ireolu' || req.session.user.name    == 'yande' ){
-        users.findOne({name: req.body.usertoreset.toLowerCase()}, (err, foundUser)=>{
-            if(err){
-                res.render('users', {
-                    msg: 'Couldn\'t fetch users..'
-                })
-            }else if(foundUser){
-                console.log(foundUser)
+        if(req.session.user.name == 'admin'){
+            users.findOne({name: req.body.usertoreset.toLowerCase()}, (err, foundUser)=>{
+                if(err){
+                    res.render('users', {
+                        msg: 'Couldn\'t fetch users..'
+                    })
+                }else if(foundUser){
+                    console.log(foundUser)
 
-                foundUser.fraudlevel = 'innocent';
-                foundUser.save((err, saved)=>{
-                    if(err){
-                        res.render('users', {
-                            msg: 'Couldn\'t fetch users..'
-                        })      
-                    } else if(saved){
-                        res.redirect('/users')
-                    }
-                })
-            }
-        })
+                    foundUser.fraudLevel = 'innocent';
+                    foundUser.save((err, saved)=>{
+                        if(err){
+                            res.render('users', {
+                                msg: 'Couldn\'t fetch users..'
+                            })      
+                        } else if(saved){
+                            res.redirect('/users')
+                        }
+                    })
+                }
+            })
         } else {
-            res.redirect('/connect')
+            res.redirect('/signin')
         }
     })
 
     app.get("/bot", (req, res)=>{
         if(req.session.user != null) {
-            if(req.session.user.name == 'yande' || req.session.user.name == 'ireolu' ){
+            if(req.session.user.name == 'admin'){
             dictionaries.find({}, (err, foundData)=>{
                 if(err){
                         res.render('bot', {
@@ -338,10 +372,13 @@ module.exports = (app)=>{
     });
     
     app.post('/uploaddictionary', (req, res)=>{
-    if(req.session.user.name == 'yande' || req.session.user.name == 'ireolu' ){
+    if(req.session.user.userType == 'admin'){
         dictionaries.findOne({content: req.body.newkeyword.toLowerCase()}, (err, found)=>{
             if(err){
-
+                res.render('bot', {
+                    msg: 'There was an issue getting the data requested.',
+                    keywords: ''
+                });
             }
             if(found){
                 dictionaries.find({}, (err, foundData)=>{
@@ -386,5 +423,16 @@ module.exports = (app)=>{
     }
     });
 
+    app.get('/signout', (req, res)=>{
+        var user = req.session.user.name;
+        if(req.session.destroy()){
+            console.log(user + ' has signed off.');
+            res.redirect('/signin')
+        }
+    })
+
+    app.get('/*', (req, res)=>{
+        res.redirect('/users')
+    })
 
     }

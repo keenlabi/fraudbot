@@ -196,20 +196,21 @@ i.fa-bars{
         text-align: center;
         padding: 5% 0% 5% 0%;
         margin:  0% 0% 30% 0%;
+        display: flex;
     }
     div.smallscreennav div.user i.fa{
-        font-size: 700%;
-        margin: 5% 0% 0%;
+        font-size: 500%;
+        margin: 5% 0% 0% 5%;
     }
     div.smallscreennav div.user div.username{
         display: block;
-        font-size: 200%;
+        font-size: 150%;
         text-transform: capitalize;
-        margin: 5% 0% 0%;
+        margin: 10% 0% 0% 5%;
     }
     div.nav div{
         font-weight: bold;
-        font-size: 120%;
+        font-size: 100%;
         text-transform: uppercase;
         padding: 10% 10%;
     }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <link rel="icon" type="image/png" href="/images/conc_bot.jpg">
-    <title>Chat Bot</title>
+    <title>Fraud Bot</title>
 </head>
 <body>
 
@@ -24,14 +24,14 @@
                 FRAUDBOT
             </div>
             <div class="nav1">
-                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
-                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
-                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                <a href="/chat/:<%=sessionClient.name %>"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
+                <%if(sessionUser.userType == 'admin') { %>
                     <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
                 <% } %>
             </div>
             <div class="nav2">
-                <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
+                <a href="/signout"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
             </div>
         </header>
         <div class="layer animated0"></div>
@@ -41,12 +41,12 @@
                 <div class="username"><%=sessionUser.name%></div>
             </div>
             <div class="nav">
-                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
-                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
-                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                <a href="/users"><div class="current"><i class="fa fa-users"></i> Users</div></a>
+                <a href="/chat/:<%=sessionClient.name %>"><div><i class="fa fa-comments-o"></i> Chat</div></a>
+                <%if(sessionUser.userType == 'admin') { %>
                     <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
                 <% } %>
-                <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
+                <a href="/signout"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
             </div>
         </div>
 
@@ -54,13 +54,13 @@
             <div class="client_bar">
                 <%var initial = sessionClient.name.slice(0, 1)%>
                 
-                <%if(sessionClient.fraudlevel == 'innocent') { %>
+                <%if(sessionClient.fraudLevel == 'innocent') { %>
                     <div class="icon innocent"><%=initial %></div>
-                <% } else if(sessionClient.fraudlevel == 'unsure') { %>
+                <% } else if(sessionClient.fraudLevel == 'unsure') { %>
                     <div class="icon unsure"><%=initial %></div>
-                <% } else if(sessionClient.fraudlevel == 'suspect') { %>
+                <% } else if(sessionClient.fraudLevel == 'suspect') { %>
                     <div class="icon suspect"><%=initial %></div>
-                <% } else if(sessionClient.fraudlevel == 'busted') { %>
+                <% } else if(sessionClient.fraudLevel == 'busted') { %>
                     <div class="icon busted"><%=initial %></div>
                 <% } %>
                 <div class="name"><%=sessionClient.name%></div>

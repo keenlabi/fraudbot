@@ -5,7 +5,7 @@ $(document).ready(()=>{
     function fetchMessages(){
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:3000/getmessages',
+            url: '/getmessages',
             dataType: 'json',
             success: function(data){
                 $('div.message_box').html('') 
@@ -51,10 +51,10 @@ $(document).ready(()=>{
                      var unsure = "Hmm... there's something not quite right about this user. ";
                     $('div.bot_message_text').html(unsure)
                 } else if(data.clientFraudLevel == 'suspect'){
-                     var suspect = "I'm suspecting this user to be a fraud.";
+                     var suspect = "I'm suspecting this user to be a fraudster.";
                     $('div.bot_message_text').html(suspect)
                 } else if(data.clientFraudLevel == 'busted'){
-                     var busted = "This user has been caught trying scam you. You're advised to block immediately.";
+                     var busted = "This user has been caught trying to scam you. You're advised to block immediately.";
                     $('div.bot_message_text').html(busted)
                 } else{
                     console.log('Couldnt detect level');
@@ -81,7 +81,7 @@ $(document).ready(()=>{
             $('textarea.typing_box').val('')
             $.ajax({
                 type: 'post',
-                url: 'http://localhost:3000/sendmessage',
+                url: '/sendmessage',
                 contentType: 'application/json',
                 data: message,
                 success: function(returnData){
@@ -90,9 +90,9 @@ $(document).ready(()=>{
                     }
                 },
                 error:function(error){
-                    var errormessage = '<div class="errormsg">There was an error fetching users. Click button below. <br>\
-                                                    <a href="/"><button>CREATE A NEW CONNECTION</button></a>\
-                                                    </div>';
+                    var errormessage = '<div class="errormsg">There was an error sending message.<br>\
+                                                    Check your connection <i class="fa fa-wifi"></i>\
+                                                  </div>';
                     $('$div.message_box').html(errormessage)
                 }
             })

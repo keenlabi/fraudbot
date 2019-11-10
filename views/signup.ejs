@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#1454a8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1454a8">
+
+    <link href="https://fonts.googleapis.com/css?family=comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/connect.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <link rel="icon" type="image/png" href="/images/conc_bot.jpg">
+    <title>Fraud Bot</title>
+</head>
+<body>
+
+    <section class="frame">
+
+        <div class="head">
+            <div class="logo animated1 fadeInLeft">
+                <div class="eyes"></div> <div class="eyes"></div> 
+            </div>
+            <div class="heading">
+                FRAUD BOT
+            </div>
+        </div>
+
+        <div class="form">
+            <form class="connectform" action="/createaccount" method="POST">
+                <div class="errormsg">
+                <%if(msg != '') { %><%=msg%><% } %>
+                </div>
+                <%if(userexists != '') { %>
+                    <input type="text"  class="markred" name="username" value="<%=username %>" placeholder="User Name" autocomplete>
+                    <p class="errormessage"><%=userexists %></p>
+                <% } else { %>
+                    <input type="text" name="username" value="<%=username %>" placeholder="User Name" autocomplete>
+                <% } %>
+
+                    <input type="password" class="" name="password" value="<%=password %>" placeholder="Password">
+
+
+                <button type="submit">SIGN UP</button>
+                <div class="footer">
+                    <div class="text">Already have an account?</div>
+                    <a href="/signin" class="signup"><div>SIGN IN</div></a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="copy">&copy; 2019. Tipster By The Mastermind.</div>
+    </section>
+    <script>
+    </script>
+</body>
+</html>

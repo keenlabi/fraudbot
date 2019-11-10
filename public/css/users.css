@@ -46,13 +46,22 @@ div.user_list{
     padding: 6% 0% 0% 3%;
 }
 div.user_list div.user{
-    box-shadow: 0px 0px 15px 0px rgb(236, 236, 236);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgb(236, 236, 236);
     width: 28%;
     height: 100px;
     display: inline-flex;
     margin: 1% 1%;
     text-align: left;
     padding: 0.5%;
+}
+div.user_list div.user:hover{
+    transition: 1s;
+    box-shadow: 0px 0px 15px 0px rgb(236, 236, 236);
+}
+div.user_list div.user:active{
+    transform: scale(0.9);
+    box-shadow: 0px 0px 5px 0px rgb(236, 236, 236);
 }
 div.icon{
     width: 20%;
@@ -97,7 +106,7 @@ form.label{
 }
 div.fraud{
     width: 50%;
-    font-size: 110%;
+    font-size: 100%;
     font-weight: bold;
     text-transform: capitalize;
     color: grey;
@@ -203,15 +212,19 @@ button.refresh i.fa:hover{
 }
 
 @media screen and ( max-width: 500px){
+    section.main_frame{
+        height: unset;
+    }
     div.registered_users{
         margin: 100px 0px 0px;
+        height: unset;
     }
     div.head{
         padding: 0% 0%;
     }
     div.title{
         display: block;
-        font-size: 200%;
+        font-size: 180%;
         font-weight: 900;
         padding: 2% 0% 2% 2%;
     }
@@ -230,25 +243,44 @@ button.refresh i.fa:hover{
     }
     div.user_list div.user{
         box-shadow: none;
-        border-bottom: 1px solid lightgrey;
-        height: 100px;
+        border-bottom: 1px solid rgb(235, 235, 235);
+        height: 90px;
         width: 98%;
         margin: 0%;
+        margin: 0%;
+        padding: 0%;
+    }
+    div.user_list div.user:active{
+        transform: scale(1);
+        box-shadow: none;
     }
     div.icon{
-        width: 14%;
-        height: 25%;
-        padding: 4% 0%;
+        font-size: 110%;
+        width: 13%;
+        height: 26%;
+        padding: 3.7% 0%;
         margin: 5% 0% 0% 2%;
     }
     div.name{
-        font-size: 130%;
+        font-size: 120%;
     }
     div.details{
         width: 75%;
     }
     form.label{
         margin: 4% 0% 0%;
+    }
+    div.fraud{
+        font-size: 90%;
+    }
+}
+
+@media screen and ( max-width: 414px){
+    div.icon{
+        width: 13%;
+        height: 25%;
+        padding: 3.5% 0%;
+        margin: 7% 0% 0% 2%;
     }
 }
 
@@ -259,7 +291,7 @@ button.refresh i.fa:hover{
     div.icon{
         width: 14%;
         height: 25%;
-        padding: 3.2% 0%;
+        padding: 3.5% 0%;
         margin: 7% 0% 0% 2%;
     }
     div.name{

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <link rel="icon" type="image/png" href="/images/conc_bot.jpg">
-    <title>Chat Bot</title>
+    <title>Fraud Bot</title>
 </head>
 <body>
 
@@ -24,14 +24,18 @@
                 FRAUDBOT
             </div>
             <div class="nav1">
-                <a href="/"><div class="current"><i class="fa fa-comments-o"></i> Chat</div></a>
-                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
-                    <a href="/users"><div><i class="fa fa-users"></i> Users</div></a>
+                <a href="/users"><div  class="current"><i class="fa fa-users"></i> Users</div></a>
+                <%if(sessionClient != undefined) { %>
+                    <a href="/chat/:<%=sessionClient.name %>"><div><i class="fa fa-comments-o"></i> Chat</div></a>
+                <% } else { %>
+                    <a href="/users"><div><i class="fa fa-comments-o"></i> Chat</div></a>
+                <% } %>
+                <%if(sessionUser.userType == 'admin') { %>
                     <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
                 <% } %>
             </div>
             <div class="nav2">
-                <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
+                <a href="/signout"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
             </div>
             <i class="fa fa-bars"></i>
         </header>
@@ -42,50 +46,56 @@
                 <div class="username"><%=sessionUser.name%></div>
             </div>
             <div class="nav">
-                <a href="/"><div><i class="fa fa-comments-o"></i> Chat</div></a>
-                <%if(sessionUser.name == 'ireoluwa' || sessionUser.name == 'yande') { %>
-                    <a href="/users"><div class="current"><i class="fa fa-users"></i> Users</div></a>
+                <a href="/users"><div class="current"><i class="fa fa-users"></i> Users</div></a>
+                <%if(sessionClient != undefined) { %>
+                    <a href="/chat/:<%=sessionClient.name %>"><div><i class="fa fa-comments-o"></i> Chat</div></a>
+                <% } else { %>
+                    <a href="/users"><div><i class="fa fa-comments-o"></i> Chat</div></a>
+                <% } %>
+                <%if(sessionUser.userType == 'admin') { %>
                     <a href="/bot"><div><i class="fa fa-android"></i> Bot</div></a>
                 <% } %>
-                <a href="/disconnect"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
+                <a href="/signout"><div><i class="fa fa-power-off"></i>DISCONNECT</div></a>
             </div>
         </div>
 
         <div class="registered_users">
             <div class="head">
                 <div class="title">All Users</div>
-                <form class="adduser" action="/createaccount" method="POST">
-                        <Input type="text" name="newuser" placeholder="Enter New User Name" required>
-                        <button type="submit">Add User</button>
-                </form>
             </div>
 
             <div class="user_list">
                 <% if( msg == '') { %>
-                    <%for (var i = user.length-1; i > 0; i--) { %>
-                        <div class="user">
-                            <%var initial = user[i].name.slice(0, 1)%>
+                    <%for (var i = user.length-1; i >= 0; i--) { %>
+                        <% if(user[i].name != sessionUser.name) { %>
+                            <a href="/chat/:<%=user[i].name %>">
+                                <div class="user">
+                                    <%var initial = user[i].name.slice(0, 1)%>
 
-                            <%if(user[i].fraudlevel == 'innocent') { %>
-                                <div class="icon innocent"><%=initial %></div>
-                            <% } else if(user[i].fraudlevel == 'unsure') { %>
-                                <div class="icon unsure"><%=initial %></div>
-                            <% } else if(user[i].fraudlevel == 'suspect') { %>
-                                <div class="icon suspect"><%=initial %></div>
-                            <% } else if(user[i].fraudlevel == 'busted') { %>
-                                <div class="icon busted"><%=initial %></div>
-                            <% } %>
+                                    <%if(user[i].fraudLevel == 'innocent') { %>
+                                        <div class="icon innocent"><%=initial %></div>
+                                    <% } else if(user[i].fraudLevel == 'unsure') { %>
+                                        <div class="icon unsure"><%=initial %></div>
+                                    <% } else if(user[i].fraudLevel == 'suspect') { %>
+                                        <div class="icon suspect"><%=initial %></div>
+                                    <% } else if(user[i].fraudLevel == 'busted') { %>
+                                        <div class="icon busted"><%=initial %></div>
+                                    <% } %>
 
-                            <div class="details">
-                                <div class="name"><%= user[i].name%></div>
-                                <form class="label" action="/resetfraudlevel" method="POST">
-                                    <div class="fraud"><%=user[i].fraudlevel %></div>
-                                    <input type="text" name="usertoreset" value="<%=user[i].name%>" hidden>
-                                    <button class="refresh"><i class="fa fa-refresh"></i></button>
-                                </form>
-                            </div>
+                                    <div class="details">
+                                        <div class="name"><%= user[i].name%></div>
+                                        <form class="label" action="/resetfraudLevel" method="POST">
+                                            <div class="fraud"><%=user[i].fraudLevel %></div>
+                                            <input type="text" name="usertoreset" value="<%=user[i].name%>" hidden>
+                                            <%if(sessionUser.userType == 'admin') { %>
+                                                <button class="refresh"><i class="fa fa-refresh"></i></button>
+                                            <% } %>
+                                        </form>
+                                    </div>
 
-                        </div>
+                                </div>
+                            </a>
+                        <% } %>
                     <% } %>
                 <% } else { %>
                         <div class="errormsg"><%=msg%>There was an error fetching users. Reload the page. <br>

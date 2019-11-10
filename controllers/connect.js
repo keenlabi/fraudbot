@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/fraudbot', {
+mongoose.connect('mongodb://labi:spectacular1@mongodb-5339-0.cloudclusters.net:10017/fraudbot?authSource=admin', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

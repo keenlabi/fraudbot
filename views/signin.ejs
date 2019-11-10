@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <link rel="icon" type="image/png" href="/images/conc_bot.jpg">
-    <title>Chat Bot</title>
+    <title>Fraud Bot</title>
 </head>
 <body>
 
@@ -24,29 +24,33 @@
                 <div class="eyes"></div> <div class="eyes"></div> 
             </div>
             <div class="heading">
-                FROBOT
+                FRAUD BOT
             </div>
         </div>
 
         <div class="form">
-            <form class="connectform" action="/connect" method="POST">
+            <form class="connectform" action="/signin" method="POST">
                 <div class="errormsg">
                 <%if(msg != '') { %><%=msg%><% } %>
                 </div>
                 <%if(nouser != '') { %>
-                    <input type="text"  class="markred" name="signinas" value="<%=signinas%>" placeholder="Sign In As" autocomplete>
+                    <input type="text"  class="markred" name="signinas" value="<%=signinas %>" placeholder="Sign In As" autocomplete>
                     <p class="errormessage"><%=nouser %></p>
                 <% } else { %>
-                    <input type="text" name="signinas" value="<%=signinas%>" placeholder="Sign In As" autocomplete>
+                    <input type="text" name="signinas" value="<%=signinas %>" placeholder="Sign In As" autocomplete>
                 <% } %>
 
-                <%if(noclient != '') { %>
-                    <input type="text" class="markred" name="connectwith" value="<%=connectwith%>" placeholder="Connect With">
-                    <p class="errormessage"><%=noclient %></p>
+                <%if(wrongpassword != '') { %>
+                    <input type="password" class="markred" name="password" value="<%=password%>" placeholder="Password">
+                    <p class="errormessage"><%=wrongpassword %></p>
                 <% } else { %>
-                    <input type="text" class="" name="connectwith" value="<%=connectwith%>" placeholder="Connect With">
+                    <input type="password" class="" name="password" value="<%=password %>" placeholder="Password">
                 <% } %>
-                <button type="submit">CONNECT</button>
+                <button type="submit">SIGN IN</button>
+                <div class="footer">
+                    <div class="text">Don't have an account?</div>
+                    <a href="/signup" class="signup"><div>SIGN UP</div></a>
+                </div>
             </form>
         </div>
         
