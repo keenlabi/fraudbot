@@ -326,36 +326,33 @@ module.exports = (app)=>{
     })
 
     app.get("/bot", (req, res)=>{
-        if(req.session.user != null) {
-           if(req.session.user.userType == 'admin'){
-            dictionaries.find({}, (err, foundData)=>{
-                if(err){
+      if(req.session.user.userType == 'admin'){
+        dictionaries.find({}, (err, foundData)=>{
+            if(err){
+                    res.render('bot', {
+                        msg: 'There was an issue getting the data requested.',
+                        keywords: ''
+                    });
+            } else {
+                    if(!foundData){
                         res.render('bot', {
                             msg: 'There was an issue getting the data requested.',
                             keywords: ''
                         });
-                } else {
-                        if(!foundData){
-                            res.render('bot', {
-                                msg: 'There was an issue getting the data requested.',
-                                keywords: ''
-                            });
-                        } else if(foundData){
-                            res.render('bot', {
-                                msg: '',
-                                keywords: foundData,
-                                sessionUser: req.session.user,
-                                sessionClient: req.session.client
-                            });
-                        }
-                }
-            })
-         } else {
-            res.redirect('/')
-         }
-        } else {
-            res.redirect('/')
-        }
+                    } else if(foundData){
+                        res.render('bot', {
+                            msg: '',
+                            keywords: foundData,
+                            sessionUser: req.session.user,
+                            sessionClient: req.session.client
+                        });
+                    }
+            }
+        })
+     } else {
+        res.redirect('/users')
+     }
+      
     });
 
     app.post("/removekeyword", (req, res)=>{
