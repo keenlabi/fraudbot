@@ -68,39 +68,32 @@
                 <% if( msg == '') { %>
                     <%for (var i = user.length-1; i >= 0; i--) { %>
                         <% if(user[i].name != sessionUser.name) { %>
-                            <a href="/chat/:<%=user[i].name %>">
                                 <div class="user">
-                                    <%var initial = user[i].name.slice(0, 1)%>
+                                    <div class="division1">
+                                    <a href="/chat/:<%=user[i].name %>">
+                                        <%var initial = user[i].name.slice(0, 1)%>
+                                        <%if(user[i].fraudLevel == 'innocent') { %>
+                                            <div class="icon innocent"><%=initial %></div>
+                                        <% } else if(user[i].fraudLevel == 'unsure') { %>
+                                            <div class="icon unsure"><%=initial %></div>
+                                        <% } else if(user[i].fraudLevel == 'suspect') { %>
+                                            <div class="icon suspect"><%=initial %></div>
+                                        <% } else if(user[i].fraudLevel == 'busted') { %>
+                                            <div class="icon busted"><%=initial %></div>
+                                        <% } %>
 
-                                    <%if(user[i].fraudLevel == 'innocent') { %>
-                                        <div class="icon innocent"><%=initial %></div>
-                                    <% } else if(user[i].fraudLevel == 'unsure') { %>
-                                        <div class="icon unsure"><%=initial %></div>
-                                    <% } else if(user[i].fraudLevel == 'suspect') { %>
-                                        <div class="icon suspect"><%=initial %></div>
-                                    <% } else if(user[i].fraudLevel == 'busted') { %>
-                                        <div class="icon busted"><%=initial %></div>
-                                    <% } %>
-
-                                    <div class="details">
-                                        <div class="name"><%= user[i].name%></div>
-                                        
-                                        <div class="moredet">
-                                            <div class="fraud"><%=user[i].fraudLevel %></div>
-                                            <div class="buttons">
-                                                <form class="label" action="/resetfraudLevel" method="POST">        
-                                                    <input type="text" name="usertoreset" value="<%=user[i].name%>" hidden>
-                                                    <%if(sessionUser.userType == 'admin') { %>
-                                                        <button class="refresh"><i class="fa fa-refresh"></i></button>
-                                                    <% } %>
-                                                </form>
-                                                <button class="delete"><a href="/delete/:<%=user[i].name%>"><i class="fa fa-trash"></i></a></button>
-                                            </div>
+                                        <div class="details">
+                                            <div class="name"><%= user[i].name%></div>
+                                            <div class="level"><%=user[i].fraudLevel %></div>
                                         </div>
+                                    </a>
+                                    </div>
+                                    <div class="division2">
+                                        <button class="refresh"><a href="/resetfraudlevel/:<%=user[i].name%>"><i class="fa fa-refresh"></i></a></button>
+                                        <button class="delete"><a href="/delete/:<%=user[i].name%>"><i class="fa fa-trash"></i></a></button>
                                     </div>
 
                                 </div>
-                            </a>
                         <% } %>
                     <% } %>
                 <% } else { %>
