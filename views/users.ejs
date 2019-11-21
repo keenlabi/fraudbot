@@ -84,13 +84,19 @@
 
                                     <div class="details">
                                         <div class="name"><%= user[i].name%></div>
-                                        <form class="label" action="/resetfraudLevel" method="POST">
+                                        
+                                        <div class="moredet">
                                             <div class="fraud"><%=user[i].fraudLevel %></div>
-                                            <input type="text" name="usertoreset" value="<%=user[i].name%>" hidden>
-                                            <%if(sessionUser.userType == 'admin') { %>
-                                                <button class="refresh"><i class="fa fa-refresh"></i></button>
-                                            <% } %>
-                                        </form>
+                                            <div class="buttons">
+                                                <form class="label" action="/resetfraudLevel" method="POST">        
+                                                    <input type="text" name="usertoreset" value="<%=user[i].name%>" hidden>
+                                                    <%if(sessionUser.userType == 'admin') { %>
+                                                        <button class="refresh"><i class="fa fa-refresh"></i></button>
+                                                    <% } %>
+                                                </form>
+                                                <button class="delete"><a href="/delete/:<%=user[i].name%>"><i class="fa fa-trash"></i></a></button>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
