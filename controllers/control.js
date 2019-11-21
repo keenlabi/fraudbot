@@ -189,7 +189,7 @@ module.exports = (app)=>{
         var statement = message.toLowerCase();
 
         for(var i = 0; i < fraud_keywords.length; i++){
-            if(statement.includes(fraud_keywords[i].content) > 0 ){
+            if(statement == fraud_keywords[i].content){
                 detected.push(fraud_keywords[i].content);
             }
         }
@@ -326,35 +326,37 @@ module.exports = (app)=>{
     })
 
     app.get("/bot", (req, res)=>{
-      if(req.session.user.userType == 'admin'){
-        dictionaries.find({}, (err, foundData)=>{
-            if(err){
-                    res.render('bot', {
-                        msg: 'There was an issue getting the data requested.',
-                        keywords: ''
-                    });
-            } else {
-                    if(!foundData){
+        if(req.session.user != null) {
+            if(req.session.user.userType == 'admin'){
+            dictionaries.find({}, (err, foundData)=>{
+                if(err){
                         res.render('bot', {
                             msg: 'There was an issue getting the data requested.',
                             keywords: ''
                         });
-                    } else if(foundData){
-                        res.render('bot', {
-                            msg: '',
-                            keywords: foundData,
-                            sessionUser: req.session.user,
-                            sessionClient: req.session.client
-                        });
-                    }
-            }
-        })
-     } else {
-        res.redirect('/users')
-     }
-      
+                } else {
+                        if(!foundData){
+                            res.render('bot', {
+                                msg: 'There was an issue getting the data requested.',
+                                keywords: ''
+                            });
+                        } else if(foundData){
+                            res.render('bot', {
+                                msg: '',
+                                keywords: foundData,
+                                sessionUser: req.session.user,
+                                sessionClient: req.session.client
+                            });
+                        }
+                }
+            })
+         } else {
+            res.redirect('/')
+         }
+        } else {
+            res.redirect('/')
+        }
     });
-
     app.post("/removekeyword", (req, res)=>{
         dictionaries.deleteOne({content: req.body.a_keyword}, (err)=>{
             if(err){
@@ -420,6 +422,20 @@ module.exports = (app)=>{
     }
     });
 
+    app.get('/delete/:name', (req, res)=>{
+
+        var clientName = req.params.name.slice(1, req.params.name.length)
+        
+        users.findOneAndDelete({name: clientName}, (err, deleted)=>{
+            if(err){
+                res.redirect('/users');
+            } else if(deleted){
+                    console.log(req.session.user.name + ' has successfully deleted ' + clientName)
+                    res.redirect('/users');
+            }
+        })     
+    })
+    
     app.get('/signout', (req, res)=>{
         var user = req.session.user.name;
         if(req.session.destroy()){
