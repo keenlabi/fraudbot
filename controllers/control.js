@@ -92,25 +92,27 @@ module.exports = (app)=>{
     });
 
     app.post('/createaccount', (req, res)=>{
-        users.findOne({name: req.body.username.toLowerCase()}, (err, exist)=>{
+        var userInputName = req.body.username.trim();
+
+        users.findOne({name: userInputName.toLowerCase()}, (err, exist)=>{
             if(err){
                 res.render('signup', {
                     msg: 'There was a problem saving your data. Please Try again.',
                     userexists: '',
-                    username: req.body.username,
+                    username: userInputName,
                     password: req.body.password
                 });
             } else if(exist){
                 res.render('signup', {
                     msg: '',
                     userexists: 'User name has been taken !',
-                    username: req.body.username,
+                    username: userInputName,
                     password: req.body.password
                 })
             } else {
                 var newUser = users();
 
-                newUser.name = req.body.username.toLowerCase()
+                newUser.name = userInputName.toLowerCase()
                 newUser.password = req.body.password;
                 newUser.fraudLevel = 'innocent';
                 newUser.userType = 'user';
@@ -129,7 +131,7 @@ module.exports = (app)=>{
                         res.render('signup', {
                             msg: 'There was an error, couldn\'t save your details.. Try again ! ',
                             userexists: '',
-                            username: req.body.username,
+                            username: userInputName,
                             password: req.body.password
                         });
                     }
@@ -298,33 +300,6 @@ module.exports = (app)=>{
         })
    })
 
-    app.post("/resetfraudlevel", (req, res)=>{
-        if(req.session.user.name == 'admin'){
-            users.findOne({name: req.body.usertoreset.toLowerCase()}, (err, foundUser)=>{
-                if(err){
-                    res.render('users', {
-                        msg: 'Couldn\'t fetch users..'
-                    })
-                }else if(foundUser){
-                    console.log(foundUser)
-
-                    foundUser.fraudLevel = 'innocent';
-                    foundUser.save((err, saved)=>{
-                        if(err){
-                            res.render('users', {
-                                msg: 'Couldn\'t fetch users..'
-                            })      
-                        } else if(saved){
-                            res.redirect('/users')
-                        }
-                    })
-                }
-            })
-        } else {
-            res.redirect('/signin')
-        }
-    })
-
     app.get("/bot", (req, res)=>{
         if(req.session.user != null) {
             if(req.session.user.userType == 'admin'){
@@ -357,6 +332,7 @@ module.exports = (app)=>{
             res.redirect('/')
         }
     });
+
     app.post("/removekeyword", (req, res)=>{
         dictionaries.deleteOne({content: req.body.a_keyword}, (err)=>{
             if(err){
@@ -422,18 +398,43 @@ module.exports = (app)=>{
     }
     });
 
+    app.get("/resetfraudlevel/:name", (req, res)=>{
+        var clientName = req.params.name.slice(1, req.params.name.length)
+
+        users.findOne({name: clientName}, (err, foundUser)=>{
+            if(err){
+                res.render('users', {
+                    msg: 'Couldn\'t fetch users..'
+                })
+            }else if(foundUser){
+                console.log(foundUser)
+
+                foundUser.fraudLevel = 'innocent';
+                foundUser.save((err, saved)=>{
+                    if(err){
+                        res.render('users', {
+                            msg: 'Couldn\'t fetch users..'
+                        })      
+                    } else if(saved){
+                        res.redirect('/users')
+                    }
+                })
+            }
+        })
+    })
+
     app.get('/delete/:name', (req, res)=>{
 
         var clientName = req.params.name.slice(1, req.params.name.length)
         
-        users.findOneAndDelete({name: clientName}, (err, deleted)=>{
-            if(err){
-                res.redirect('/users');
-            } else if(deleted){
-                    console.log(req.session.user.name + ' has successfully deleted ' + clientName)
+            users.findOneAndDelete({name: clientName}, (err, deleted)=>{
+                if(err){
                     res.redirect('/users');
-            }
-        })     
+                } else if(deleted){
+                        console.log(req.session.user.name + ' has successfully deleted ' + clientName)
+                        res.redirect('/users');
+                }
+            })
     })
     
     app.get('/signout', (req, res)=>{
