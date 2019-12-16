@@ -191,7 +191,7 @@ module.exports = (app)=>{
         var statement = message.toLowerCase();
 
         for(var i = 0; i < fraud_keywords.length; i++){
-            if(statement == fraud_keywords[i].content){
+            if(statement.includes(fraud_keywords[i].content)){
                 detected.push(fraud_keywords[i].content);
             }
         }
