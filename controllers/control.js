@@ -252,7 +252,7 @@ module.exports = (app)=>{
                                     sessionClient: req.session.client,
                                     sessionUser: req.session.user,
                                     text: foundData,
-                                    clientFraudLevel: req.session.client.fraudLevel
+                                    clientFraudLevel: clientData.fraudLevel
                                 }
 
                                 res.send(allData);
