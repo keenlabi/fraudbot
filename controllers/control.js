@@ -253,6 +253,8 @@ module.exports = (app)=>{
                                     sessionUser: req.session.user,
                                     text: foundData,
                                     clientFraudLevel: clientData.fraudLevel
+
+
                                 }
 
                                 res.send(allData);
@@ -321,6 +323,7 @@ module.exports = (app)=>{
                                 keywords: foundData,
                                 sessionUser: req.session.user,
                                 sessionClient: req.session.client
+
                             });
                         }
                 }
