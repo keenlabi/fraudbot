@@ -199,6 +199,7 @@ module.exports = (app)=>{
 
 
    app.get('/getmessages', (req, res)=>{
+       if(req.session.user != null || req.session.client != null ){
         text.find({
             $and: [
                 {$or : [ {from: req.session.user.name}, {from: req.session.client.name} ] },
@@ -265,6 +266,9 @@ module.exports = (app)=>{
 
             }
         })
+       } else {
+           res.redirect('/users');
+       }
    });
 
    app.post('/sendmessage', (req, res)=>{
