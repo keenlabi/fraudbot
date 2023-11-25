@@ -1,6 +1,5 @@
 # chatbot
 A bot for detecting fraud attempt.
-This project was originally created by https://ireoluwaadedugbe.com and modified by https://github.com/Labi-Lawal/.
 This version contains the intelligence in the most basic form with a simple Web UI to interact with the bot.
 It is built with NodeJS (JavaScript), Html and CSS.
 The bot determines if you are a fraudster or not based on the texts you send to it,
